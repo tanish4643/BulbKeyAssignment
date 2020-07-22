@@ -1,0 +1,46 @@
+<div class="row" *ngIf="!loading">
+    <div class="col-md-8 col-sm-6 col-xs-12">
+        <img src="{{imageObj.image_url}}" />
+    </div>
+    <div class="col-md-4 col-sm-6 col-xs-12 description-view">
+        <span>
+            <h4 style="font-family: 'Trebuchet MS';font-weight: bold;">
+                {{imageObj.title == "" ? "No Title Found" : imageObj.title}}
+            </h4>
+        </span>
+        <span class="desc-text">{{imageObj.description == "" ? "No Description Found" : imageObj.description}}</span>
+        <span class="info-text">Posted By: {{imageObj.postedby}}</span>
+        <span class="info-text">{{imageObj.postedon}}</span>
+        <div class="form-div" *ngIf="!ratingFound">
+            <div class="slider-view">
+                <label>Rating: </label>
+                <input  type="range" min="1" max="10" value="0" 
+                        class="input-slider" (change)="sliderChanged($event)">
+            </div>
+            <div class="rating-view">
+                <img src="../../../assets/star_icon.png" *ngFor='let elem of counter(ratingValue)' />
+                <img src="../../../assets/blank_star.png" *ngFor='let elem of counter(10-ratingValue)' />
+            </div>
+            <div>
+                <input required [(ngModel)]="name" placeholder="Your Name Here..." />
+            </div>
+            <div>
+                <input required [(ngModel)]="reason" placeholder="Your Reason Here..." />
+            </div>
+            <h6 *ngIf="formError" class="error">Form is incomplete</h6>
+            <button (click)="giveRating()">Submit</button>
+        </div>
+        <div class="form-div" *ngIf="ratingFound">
+            <h4 class="heading-text">{{ratingObj.name}}</h4>
+            <div class="rating-view">
+                <img src="../../../assets/star_icon.png" *ngFor='let elem of counter(ratingObj.rating)' />
+                <img src="../../../assets/blank_star.png" *ngFor='let elem of counter(10-ratingObj.rating)' />
+            </div>
+            <span class="desc-text">{{ratingObj.reason}}</span>
+            <h4 *ngIf="redirecting" class="heading-text">Redirecting in 2 Seconds</h4>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="loading">
+    <img src="https://flevix.com/wp-content/uploads/2019/07/Clock-Loading.gif" class="loader" />
+</div>

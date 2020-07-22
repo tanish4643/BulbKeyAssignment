@@ -1,0 +1,23 @@
+img{
+    width: 100%;
+    margin-bottom: 10%;
+    cursor: pointer;
+    height: 200px;
+}
+.loader{
+    width: 250px;
+    height: 250px;
+}
+.retry{
+    border: 0px;
+    background-color: #0091DC;
+    padding: 5px 20px 5px 20px;
+    color: white;
+    font-size: 16px;
+    font-family: Trebuchet MS;
+    border-radius: 15px;
+}
+.error{
+    color: red;
+    font-size: 16px;
+}

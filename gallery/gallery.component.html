@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" routerLink="{{'/image/'+item.id}}"
+            *ngFor='let item of gallery'>
+        <img src={{item.image_url}} class="img-fluid"/>
+    </div>
+    <div *ngIf="loading">
+        <img src="https://flevix.com/wp-content/uploads/2019/07/Clock-Loading.gif" class="loader" />
+    </div>
+    <div *ngIf="error">
+        <h6 class="error">Some Error Occured</h6>
+        <button (click)="getGallery()" class="retry">Retry</button>
+    </div>
+</div>
