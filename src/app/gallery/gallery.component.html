@@ -1,13 +1,29 @@
-<div class="row">
+<div class="row" *ngIf="!error">
     <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" routerLink="{{'/image/'+item.id}}"
             *ngFor='let item of gallery'>
         <img src={{item.image_url}} class="img-fluid"/>
+        <div class="rating-cover" *ngIf="commentsArr.includes(item.id)">
+            <p>{{comments[commentsArr.indexOf(item.id)].reason}}</p>
+            <div class="rating-view">
+                <img src="../../../assets/star_icon.png" 
+                     *ngFor='let elem of counter(comments[commentsArr.indexOf(item.id)].rating)' />
+                <img src="../../../assets/blank_star.png" 
+                     *ngFor='let elem of counter(10-comments[commentsArr.indexOf(item.id)].rating)' />
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12" style="margin: 20px;" *ngIf="!loading">
+        <button class="pager-button" 
+                (click)="loadData(-1)"
+                *ngIf="pageNumber!=1">Prev</button>
+        <button (click)="loadData(1)"
+                class="pager-button">Next</button>
     </div>
     <div *ngIf="loading">
         <img src="https://flevix.com/wp-content/uploads/2019/07/Clock-Loading.gif" class="loader" />
     </div>
-    <div *ngIf="error">
-        <h6 class="error">Some Error Occured</h6>
-        <button (click)="getGallery()" class="retry">Retry</button>
-    </div>
+</div>
+<div class="row" *ngIf="error">
+    <h6 class="error">Some Error Occured</h6>
+    <button (click)="getGallery()" class="retry">Retry</button>
 </div>
